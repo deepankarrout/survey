@@ -10,7 +10,7 @@ $conn = $database->getConnection();
 $type = isset($_REQUEST['type']) ? $_REQUEST['type'] : '';
 if ($type == 'fetchCardDetails') {
     $surveyCode = isset($_POST['survey']) ? htmlspecialchars(strip_tags($_POST['survey'])) : 'CRSS';
-    $output = array('data' => [], 'response' => '', 'message' => '', 'status' => 500);
+    $output = array('data' => [], 'chart' => [], 'response' => '', 'message' => '', 'status' => 500);
     // $query = "SELECT count(DISTINCT A.id) as surveyor_cnt, count(DISTINCT B.survey_uuid) as survey_cnt,
     //             count(DISTINCT C.question_bit) as total_qn
     //         FROM surveyor as A 
@@ -39,6 +39,37 @@ if ($type == 'fetchCardDetails') {
             $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
             foreach($row AS $Row){
                 $output['data'][] = $Row;
+            }
+            $output['response'] = 'SUCCESS';
+            $output['message'] = 'Successfully Fetched Analytic Details !';
+            $output['status'] = '200';
+        } else {
+            $output['response'] = 'NA';
+            $output['message'] = 'Surveyor Details Not Available !';
+            $output['status'] = '500';
+        }
+    } else {
+        $output['response'] = 'FAILURE';
+        $output['message'] = 'Somthing Went Wrong !';
+        $output['status'] = '500';
+    }
+    $ChartQuery = "SELECT C.code, CASE WHEN SUM(A.answer) IS NULL THEN 0 ELSE CONVERT(SUM(A.answer), UNSIGNED) END AS amount 
+                    FROM center_master C
+                LEFT JOIN surevey_data A ON A.survey_code = :sc AND A.survey_uuid = C.code
+                LEFT JOIN questions B ON A.survey_code = :sc 
+                    AND A.question_code = B.question_code 
+                    AND B.question = 'Amount' AND B.status = 1
+                WHERE C.survey_code = :sc
+                GROUP BY C.code
+                ORDER BY C.id;";
+    $stmt = $conn->prepare($ChartQuery);
+    $stmt->bindParam(':sc', $surveyCode);
+    if ($stmt->execute()) {
+        $num = $stmt->rowCount();
+        if ($num > 0) {
+            $row = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            foreach($row AS $Row){
+                $output['chart'][] = $Row;
             }
             // $output['data'] = $row;
             $output['response'] = 'SUCCESS';
