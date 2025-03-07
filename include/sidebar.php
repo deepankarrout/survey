@@ -12,19 +12,20 @@
             </li>
             <li class="menu-header">Survey</li>
             <li class="dropdown">
-                <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="grid"></i><span>Survey</span></a>
+                <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="layout"></i><span>Survey</span></a>
                 <ul class="dropdown-menu">
                     <li><a class="nav-link" href="survey-form.php">Survey Form</a></li>
                 </ul>
             </li>
-            <!-- <li class="menu-header">Reports</li>
+            <li class="menu-header">Reports</li>
             <li class="dropdown">
-                <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="grid"></i><span>Survey Reports</span></a>
+                <a href="#" class="menu-toggle nav-link has-dropdown"><i data-feather="grid"></i><span>Reports</span></a>
                 <ul class="dropdown-menu">
-                    <li><a class="nav-link" href="datatables.php">Datatable</a></li>
-                    <li><a class="nav-link" href="export-table.php">Export Table</a></li>
+                    <!-- <li><a class="nav-link" href="datatables.php">Datatable</a></li> -->
+                    <!-- <li><a class="nav-link" href="export-table.php">Export Table</a></li> -->
+                    <li><a class="nav-link" href="survey-report.php">Survey Report</a></li>
                 </ul>
-            </li> -->
+            </li>
             <li class="menu-header">Auth</li>
             <li class="dropdown">
               <a href="#" class="menu-toggle nav-link has-dropdown"><i
