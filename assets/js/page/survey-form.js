@@ -113,6 +113,10 @@ $(function () {
                                                             QuestionForm += `<div class="custom-group">
                                                                                 <input type="text" id="${QuestionElement.question_code}" name="${QuestionElement.question_code}" class="custom-control" ${required}/>
                                                                             </div>`;
+                                                        } else if(QuestionElement.question_type == 'Numeric'){
+                                                            QuestionForm += `<div class="custom-group">
+                                                                                <input type="number" pattern="[0-9]*" id="${QuestionElement.question_code}" name="${QuestionElement.question_code}" class="custom-control" ${required}/>
+                                                                            </div>`;
                                                         }
                                                             QuestionForm += `</div></div>`;
                                                     });
@@ -214,7 +218,7 @@ $(function () {
                                 },
                             });
                         } else {
-                            $('#showSurveyDeatils').html(`<h5><br><br>The survey for this school ${res.data[0].name} (UDISE Code: ${res.data[0].code}) was conducted on ${res.data[0].survey_date}.<br><br></h5>`);
+                            $('#showSurveyDeatils').html(`<h5><br><br>The survey for this school ${res.data[0].name} (UDISE Code: ${res.data[0].code}) was conducted on ${formatDate(res.data[0].survey_date)}.<br><br></h5>`);
                             $('#divInformation').hide(200);
                             $('#showSurveyDeatils').show(200);
                             $('#divFilter').show(200);
@@ -233,4 +237,24 @@ $(function () {
 function setButtonWavesEffect(event) {
     $(event.currentTarget).find('[role="menu"] li a').removeClass('waves-effect');
     $(event.currentTarget).find('[role="menu"] li:not(.disabled) a').addClass('waves-effect');
+}
+
+function formatDate(dateStr) {
+    const date = new Date(dateStr);
+    const day = date.getDate();
+    const month = date.toLocaleString('en-US', { month: 'long' });
+    const year = date.getFullYear();
+
+    // Function to get ordinal suffix
+    function getOrdinalSuffix(day) {
+        if (day > 3 && day < 21) return 'th'; // Covers 4th-20th
+        switch (day % 10) {
+            case 1: return 'st';
+            case 2: return 'nd';
+            case 3: return 'rd';
+            default: return 'th';
+        }
+    }
+
+    return `${day}${getOrdinalSuffix(day)} ${month} ${year}`;
 }
