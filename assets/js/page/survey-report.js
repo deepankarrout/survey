@@ -20,4 +20,15 @@ $(function () {
             }
         },
     });
+    $("#btnDownloadReport").click(function () {
+        DowloadExcel();
+    });
 });
+
+function DowloadExcel(fn, dl) {
+    console.log('jhjkhjk');
+    let fileName = "Survey_Report";
+    let htmlContent = $("#divReportShow").html();
+    let blob = new Blob([htmlContent], { type: "application/vnd.ms-excel" });
+    saveAs(blob, fileName + ".xls");
+}

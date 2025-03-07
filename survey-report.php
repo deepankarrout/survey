@@ -15,12 +15,12 @@ include('include/sidebar.php');
         padding: 8px;
         text-align: left;
     }
-    th {
+    /* th {
         background-color: #f4f4f4;
     }
     tr:nth-child(even) {
         background-color: #f9f9f9;
-    }
+    } */
 </style>
 <!-- Main Content -->
 <div class="main-content">
@@ -33,6 +33,9 @@ include('include/sidebar.php');
                             <h4>Survey Report</h4>
                         </div>
                         <div class="card-body">
+                            <div style="padding-bottom:10px;">
+                                <button type="button" id="btnDownloadReport" class="btn btn-icon icon-left btn-success"><i class="fas fa-file-excel"></i>&nbsp;Excel</button>
+                            </div>
                             <div class="table-responsive" id="divReportShow"></div>
                         </div>
                     </div>
@@ -54,6 +57,14 @@ include('include/footer.php');
 <!-- JS Libraies -->
 <script src="assets/bundles/jquery-steps/jquery.steps.min.js"></script>
 <!-- <script src="assets/bundles/select2/dist/js/select2.full.min.js"></script> -->
+ 
+<!-- Added to conver html content to excel -->
+<script src="https://unpkg.com/tableexport.jquery.plugin/tableExport.min.js"></script>
+<script src="https://unpkg.com/xlsx/dist/xlsx.full.min.js"></script>
+<script src="https://unpkg.com/blobjs/dist/Blob.min.js"></script>
+<script src="https://unpkg.com/file-saverjs"></script>
+<!-- Added to conver html content to excel -->
+ 
 <!-- Page Specific JS File -->
 <script src="assets/js/page/survey-report.js?ver=<?=rand();?>"></script>
 <!-- Template JS File -->

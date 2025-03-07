@@ -233,7 +233,7 @@ if ($type == 'getReport') {
             }
         }
     }
-    $html = '<table class="table-hover" id="tableSurveyReport" style="width:100%;">
+    $html = '<table class="table-hover" id="tableSurveyReport" border="1" style="width:100%;">
             <thead>
                 <tr>'.$TableHeader1stRow.'</tr>
                 <tr>'.$TableHeader2ndRow.'</tr>
