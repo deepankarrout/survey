@@ -15,9 +15,14 @@ $(function () {
         success: function (dataResult) {
           let res = jQuery.parseJSON(dataResult);
           if (res.response == "SUCCESS") {
-            $('.card-1').html(res.data.survey_cnt);
-            $('.card-2').html(res.data.surveyor_cnt);
-            $('.card-3').html(res.data.total_qn);
+            let i = 1;
+            res.data.forEach(element => {
+                $(`.card-${i}`).html(element.cnt);
+                i++;
+            });
+            // $('.card-1').html(res.data.survey_cnt);
+            // $('.card-2').html(res.data.surveyor_cnt);
+            // $('.card-3').html(res.data.total_qn);
           }
         },
     });
